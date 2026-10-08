@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна №1 — кореляційний аналіз</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div>
+        <h1>Кореляційний аналіз</h1>
+        <p>Цифровий ехолот · Node.js</p>
+      </div>
+      <div id="status" class="status">Готово</div>
+    </header>
+
+    <section class="work-section">
+      <h2>1. Конфігурація ехолота та еталонний імпульс</h2>
+      <div class="panel info">
+        <div><b>Fs:</b> <span id="sampleRate">—</span> Гц</div>
+        <div><b>V:</b> <span id="soundSpeed">—</span> м/с</div>
+        <div><b>Несуча частота:</b> <span id="carrierFreq">—</span> Гц</div>
+        <div><b>Довжина імпульсу:</b> <span id="pulseLength">—</span> відліків</div>
+        <div><b>Кроків:</b> <span id="totalSteps">—</span></div>
+        <div><b>Макс. глибина:</b> <span id="maxDepth">визначається після вимірювання</span></div>
+      </div>
+      <section class="panel chart-panel">
+        <div class="chart-title">Еталонний зондувальний імпульс Y[i]</div>
+        <canvas id="pulseChart"></canvas>
+      </section>
+    </section>
+
+    <section class="work-section">
+      <h2>2. Аналіз сигналу в окремій точці</h2>
+      <section class="panel controls">
+        <div class="control-group">
+          <label for="step">Крок маршруту</label>
+          <input id="step" type="number" min="0" value="0">
+        </div>
+        <button id="measureButton">Отримати вимірювання</button>
+      </section>
+
+      <section class="stats">
+        <div class="stat"><span>kmax (L=4)</span><strong id="kmax">—</strong></div>
+        <div class="stat"><span>Затримка (L=4)</span><strong id="delay">—</strong></div>
+        <div class="stat"><span>Глибина: 1 запит</span><strong id="singleDepth">—</strong></div>
+        <div class="stat"><span>Глибина: усереднення L=4</span><strong id="avgDepth">—</strong></div>
+      </section>
+
+      <section class="panel chart-panel">
+        <div class="chart-title">Прийнятий сигнал: один запит та усереднення L=4</div>
+        <canvas id="signalChart"></canvas>
+      </section>
+
+      <section class="panel chart-panel">
+        <div class="chart-title">Взаємна кореляція R(k): один запит та усереднення L=4</div>
+        <canvas id="correlationChart"></canvas>
+      </section>
+    </section>
+
+    <section class="work-section">
+      <h2>3. Повне сканування маршруту</h2>
+      <section class="panel controls">
+        <button id="scanButton">Запустити повне сканування</button>
+        <button id="stopButton" class="secondary" disabled>Зупинити</button>
+      </section>
+      <section class="panel chart-panel">
+        <div class="chart-title">Профіль дна: одиночне вимірювання та усереднення L=4</div>
+        <canvas id="depthChart"></canvas>
+      </section>
+    </section>
+
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
